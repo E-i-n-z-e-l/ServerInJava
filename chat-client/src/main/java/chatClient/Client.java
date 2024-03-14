@@ -82,7 +82,7 @@ public class Client {
             }
         }).start();
     }
-
+// _____________________________________________________________________________________________________________________
 //    /**
 //     * Метод отправляет сообщения на сервер.<p></p>
 //     *
@@ -111,9 +111,12 @@ public class Client {
 //            closeEverything(socket, bufferedReader, bufferedWriter);
 //        }
 //    }
-
+// _____________________________________________________________________________________________________________________
     public void sendMessage() {
         try {
+            bufferedWriter.write(name);
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
             Scanner scanner = new Scanner(System.in);
             while (socket.isConnected()) {
                 String message = scanner.nextLine();

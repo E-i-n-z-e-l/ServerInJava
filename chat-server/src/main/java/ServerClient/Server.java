@@ -14,54 +14,33 @@ public class Server {
         this.serverSocket = serverSocket;
     }
 
-//    /**
-//     * Метод runServer() выполняет основную логику работы сервера.
-//     */
-//    public void runServer(){
-//        try {
-//            /* В цикле while проверяется, не закрыт ли серверный сокет serverSocket.
-//            *  Если серверный сокет serverSocket не закрыт, вызывается метод accept() серверного сокета. */
-//            while (!serverSocket.isClosed()) {
-//
-//                /* Метод accept() блокирует выполнение программы, пока не будет установлено соединение с клиентом. */
-//                Socket socket = serverSocket.accept();
-//
-//                /* После установления соединения создается объект класса ClientManager, передавая ему сокет. */
-//                ClientManager clientManager = new ClientManager(socket);
-//                System.out.println("Подключен новый клиент!");
-//
-//                /* Создается новый поток Thread для каждого клиента и запускается с объектом ClientManager.
-//                *  Это позволяет обрабатывать каждого клиента в отдельном потоке. */
-//                Thread thread = new Thread(clientManager);
-//                thread.start();
-//            }
-//        }
-//        catch (IOException e){
-//            closeSocket();
-//        }
-//    }
-public void runServer(){
-    try {
-        while (!serverSocket.isClosed()) {
-            Socket socket = serverSocket.accept();
+    /**
+     * Метод runServer() выполняет основную логику работы сервера.
+     */
+    public void runServer(){
+        try {
+            /* В цикле while проверяется, не закрыт ли серверный сокет serverSocket.
+            *  Если серверный сокет serverSocket не закрыт, вызывается метод accept() серверного сокета. */
+            while (!serverSocket.isClosed()) {
 
-            // Получаем имя получателя из bufferedReader
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            String recipientName = in.readLine();
+                /* Метод accept() блокирует выполнение программы, пока не будет установлено соединение с клиентом. */
+                Socket socket = serverSocket.accept();
 
-            // Создаем объект ClientManager с передачей recipientName
-            ClientManager clientManager = new ClientManager(socket, recipientName);
+                /* После установления соединения создается объект класса ClientManager, передавая ему сокет. */
+                ClientManager clientManager = new ClientManager(socket);
+                System.out.println("Подключен новый клиент!");
 
-            System.out.println("Подключен новый клиент!");
-
-            Thread thread = new Thread(clientManager);
-            thread.start();
+                /* Создается новый поток Thread для каждого клиента и запускается с объектом ClientManager.
+                *  Это позволяет обрабатывать каждого клиента в отдельном потоке. */
+                Thread thread = new Thread(clientManager);
+                thread.start();
+            }
+        }
+        catch (IOException e){
+            closeSocket();
         }
     }
-    catch (IOException e){
-        closeSocket();
-    }
-}
+
 
 
 

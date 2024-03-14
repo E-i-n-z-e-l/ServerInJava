@@ -20,7 +20,7 @@ public class ClientManager implements Runnable {
      *
      * @param socket
      */
-    public ClientManager(Socket socket, String recipientName) {
+    public ClientManager(Socket socket) {
         this.socket = socket;
         // Будет хранить имя получателя личного сообщения;
         try {
@@ -60,7 +60,7 @@ public class ClientManager implements Runnable {
             }
         }
     }
-
+// _____________________________________________________________________________________________________________________
     //    /**
 //     * Метод broadcastMessage используется для отправки сообщения всем остальным клиентам, кроме отправителя.
 //     *
@@ -84,6 +84,7 @@ public class ClientManager implements Runnable {
 //            }
 //        }
 //    }
+// _____________________________________________________________________________________________________________________
     private void broadcastMessage(String message) {
         if (message.startsWith("@")) {
             String[] splitMessage = message.split(" ", 2);
